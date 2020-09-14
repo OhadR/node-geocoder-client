@@ -1,32 +1,32 @@
-import { Config } from "./config/config";
-import { ElasticsearchDatastore } from "./repository/utilities-elasticsearch-datastore";
 var debug = require('debug')('runner');
+import * as NodeGeocoder from 'node-geocoder';
 
-class GetLayersByBoundingBox {
+const options = {
+  provider: 'openmapquest',
+  apiKey: 'ddd',
 
-  async handler()  {
-    const ownerId = 'MTohad';
+  // Optional depending on the providers
+//  fetch: customFetchImplementation,
+//  apiKey: 'YOUR_API_KEY', // for Mapquest, OpenCage, Google Premier
+//  formatter: null // 'gpx', 'string', ...
+};
+
+const geocoder = NodeGeocoder(options);
+
+class Main {
+
+  async main()  {
     try {
-      debug('got accountId:', ownerId);      //----------------------------------------------------------------------------------------------------------------------------------------
+      const  resultStr = await geocoder.reverse({
+        lat: 32.101786566878445,
+        lon: 34.858965073072056
+        // lat: asset.metadata.location.lat,
+        // lon: asset.metadata.location.lon
+      });
 
-      const elasticConfig = Config.instance.elasticSearch;
-      if (elasticConfig == null) {
-        debug(`failed getting elasticConfig `);
-        throw new Error(`failed getting elasticConfig `);
-      }
+      const result = JSON.parse(resultStr);
 
-      const layersEsDatastore = new ElasticsearchDatastore(elasticConfig);
-      debug(`runner: got elastic' configuration`);
-
-      const hits: object[] = await layersEsDatastore.getLayersByOwner(ownerId);
-      //debug(hits);
-      debug('hits.length: ' + hits.length);
-
-      const hitsScrolled: object[] = await layersEsDatastore.getScroll();
-      debug('hitsScrolled.length: ' + hitsScrolled.length);
-
-
-      //return this.response(200, layers);
+      debug('got result:', result);      //----------------------------------------------------------------------------------------------------------------------------------------
     }
     catch(e) {
       debug('failed execution:', e.stack)
