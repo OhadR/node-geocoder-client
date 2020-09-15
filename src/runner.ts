@@ -55,9 +55,37 @@ class Main {
     }
   }
 
+
+  async google()  {
+    debug('[google]');
+
+    const options = {
+      provider: 'google',
+      apiKey: 'AIzaSyBOQku871N0tiOejLIdP_5kKz1nMNeAB5M',
+      clientId: '406508809484-o12uk87v05tqn7qgff495q7835sh80fi.apps.googleusercontent.com',
+    };
+
+    const geocoder = NodeGeocoder(options);
+
+    try {
+      const  resultStr = await geocoder.reverse({
+        lat: 32.101786566878445,
+        lon: 34.858965073072056
+        // lat: asset.metadata.location.lat,
+        // lon: asset.metadata.location.lon
+      });
+
+      debug('[google] got result:', resultStr);      //----------------------------------------------------------------------------------------------------------------------------------------
+    }
+    catch(e) {
+      debug('[google] failed execution:', e.stack)
+    }
+  }
+
   async run() {
     await this.openMapquest();
     await this.openStreetsMap();
+    await this.google();
   }
 }
 
