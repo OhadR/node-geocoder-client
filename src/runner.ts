@@ -3,7 +3,7 @@ import * as NodeGeocoder from 'node-geocoder';
 
 class Main {
 
-  async openStreetsMap()  {
+  async openStreetsMap() : Promise<string> {
     debug('[openStreetsMap]');
 
     const options = {
@@ -21,15 +21,21 @@ class Main {
         // lon: asset.metadata.location.lon
       });
 
-      debug('[openStreetsMap] got result:', resultStr);      //----------------------------------------------------------------------------------------------------------------------------------------
+      debug('[openStreetsMap] got result:', resultStr);
+
+      if(!resultStr || !resultStr.length) {
+        debug('[openStreetsMap] resultStr is null:');
+        return null;
+      }
+
+      return resultStr[0].formattedAddress;
     }
     catch(e) {
       debug('[openStreetsMap] failed execution:', e.stack)
-      //return this.error(500, {success: false, error: e.stack });
     }
   }
 
-  async openMapquest ()  {
+  async openMapquest() : Promise<string> {
     debug('[openmapquest]');
 
     const options = {
@@ -47,11 +53,16 @@ class Main {
         // lon: asset.metadata.location.lon
       });
 
-      debug('[openmapquest] got result:', resultStr);      //----------------------------------------------------------------------------------------------------------------------------------------
+      debug('[openmapquest] got result:', resultStr);
+      if(!resultStr || !resultStr.length) {
+        debug('[openmapquest] resultStr is null:');
+        return null;
+      }
+
+      return resultStr[0].city + ', ' +resultStr[0].country;
     }
     catch(e) {
       debug('[openmapquest] failed execution:', e.stack)
-      //return this.error(500, {success: false, error: e.stack });
     }
   }
 
@@ -83,9 +94,15 @@ class Main {
   }
 
   async run() {
-    await this.openMapquest();
-    await this.openStreetsMap();
-    await this.google();
+    let formattedLocation;
+
+    formattedLocation = await this.openMapquest();
+    debug('openMapquest() output: ' + formattedLocation);
+
+    formattedLocation = await this.openStreetsMap();
+    debug('openStreetsMap() output: ' + formattedLocation);
+
+    formattedLocation = await this.google();
   }
 }
 
