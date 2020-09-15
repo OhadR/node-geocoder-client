@@ -1,18 +1,6 @@
 var debug = require('debug')('runner');
 import * as NodeGeocoder from 'node-geocoder';
 
-const options = {
-  provider: 'openstreetmap',
-  apiKey: 'ddd',
-
-  // Optional depending on the providers
-//  fetch: customFetchImplementation,
-//  apiKey: 'YOUR_API_KEY', // for Mapquest, OpenCage, Google Premier
-//  formatter: null // 'gpx', 'string', ...
-};
-
-const geocoder = NodeGeocoder(options);
-
 class Main {
 
   async openStreetsMap()  {
