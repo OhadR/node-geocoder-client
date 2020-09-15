@@ -3,6 +3,8 @@
         "target": "es2015",
         "outDir": "dist",
         "types": ["node"],
-        "module": "commonjs"
+        "module": "commonjs",
+        //let debugger stop in TS files:
+        "sourceMap": true
     }
 }

@@ -8,7 +8,13 @@
 to allow `debug`:
     
     DEBUG=runner,*
+
+## let debugger stop in TS files
+
+Add the following to  `tsconfig.json`:
     
+    //let debugger stop in TS files:
+    "sourceMap": true    
     
 ##### MapQuest Open APIs
 https://developer.mapquest.com/documentation/open/
