@@ -16,10 +16,11 @@ const geocoder = NodeGeocoder(options);
 class Main {
 
   async openStreetsMap()  {
-    debug('openStreetsMap()');
+    debug('[openStreetsMap]');
 
     const options = {
       provider: 'openstreetmap',
+      osmServer: 'https://nominatim.openstreetmap.org',
     };
 
     const geocoder = NodeGeocoder(options);
@@ -32,25 +33,23 @@ class Main {
         // lon: asset.metadata.location.lon
       });
 
-      const result = JSON.parse(resultStr);
-
-      debug('got result:', result);      //----------------------------------------------------------------------------------------------------------------------------------------
+      debug('[openStreetsMap] got result:', resultStr);      //----------------------------------------------------------------------------------------------------------------------------------------
     }
     catch(e) {
-      debug('failed execution:', e.stack)
+      debug('[openStreetsMap] failed execution:', e.stack)
       //return this.error(500, {success: false, error: e.stack });
     }
   }
 
   async openMapquest ()  {
-    debug('openMapquest()');
+    debug('[openmapquest]');
 
     const options = {
       provider: 'openmapquest',
       apiKey: 'BUrnf8yAQyCaW9au00hzKFrGUY3Pyuq9',
     };
 
-    const geocoder = await NodeGeocoder(options);
+    const geocoder = NodeGeocoder(options);
 
     try {
       const  resultStr = await geocoder.reverse({
@@ -60,12 +59,10 @@ class Main {
         // lon: asset.metadata.location.lon
       });
 
-      const result = JSON.parse(resultStr);
-
-      debug('got result:', result);      //----------------------------------------------------------------------------------------------------------------------------------------
+      debug('[openmapquest] got result:', resultStr);      //----------------------------------------------------------------------------------------------------------------------------------------
     }
     catch(e) {
-      debug('failed execution:', e.stack)
+      debug('[openmapquest] failed execution:', e.stack)
       //return this.error(500, {success: false, error: e.stack });
     }
   }
