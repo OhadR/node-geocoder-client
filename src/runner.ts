@@ -1,5 +1,11 @@
 var debug = require('debug')('runner');
 import * as NodeGeocoder from 'node-geocoder';
+const client = require('@bigdatacloudapi/client')('df8899cb610e475aa93a6a880352b834');
+
+interface LatLon {
+  lat: number,
+  lon: number
+}
 
 class Main {
 
@@ -93,6 +99,34 @@ class Main {
     }
   }
 
+  private async bigDataCloud(location: LatLon) {
+    if(!location.lon ||
+        !location.lat ||
+        location.lon > 180 ||
+        location.lon < -180) {
+      debug(`malformed lon/lat: ${JSON.stringify(location)}`);
+      return null;
+    }
+    try {
+      const resultStr = await client.getReverseGeocode({
+        latitude: location.lat,
+        longitude: location.lon
+        // latitude: '32.101786566878445',
+        // longitude: '34.858965073072056'
+      });
+
+      debug('[bigDataCloud] got result:', resultStr);
+      if(!resultStr || !resultStr.length) {
+        debug('[bigDataCloud] resultStr is null:');
+        return null;
+      }
+      return resultStr[0].city + ', ' +resultStr[0].country;
+    }
+    catch(e) {
+      debug('[bigDataCloud] failed execution:', e.stack)
+    }
+  }
+
   async run() {
     let formattedLocation;
 
@@ -103,6 +137,11 @@ class Main {
     debug('openStreetsMap() output: ' + formattedLocation);
 
     formattedLocation = await this.google();
+
+    formattedLocation = await this.bigDataCloud({
+      lat: 32.101786566878445,
+      lon: 34.858965073072056});
+    debug('bigDataCloud() output: ' + formattedLocation);
   }
 }
 

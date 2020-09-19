@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/node": "^14.0.27",
     "debug": "^4.1.1",
+    "@bigdatacloudapi/client": "^1.0.1",
     "node-geocoder": "^3.27.0"
   }
 }
