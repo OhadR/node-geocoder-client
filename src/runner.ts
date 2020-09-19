@@ -22,9 +22,10 @@ class Main {
     try {
       const  resultStr = await geocoder.reverse({
         lat: 32.101786566878445,
-        lon: 34.858965073072056
+        lon: 34.858965073072056,
         // lat: asset.metadata.location.lat,
         // lon: asset.metadata.location.lon
+        'accept-language': 'en',
       });
 
       debug('[openStreetsMap] got result:', resultStr);
