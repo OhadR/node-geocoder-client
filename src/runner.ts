@@ -9,7 +9,7 @@ interface LatLon {
 
 class Main {
 
-  async openStreetsMap() : Promise<string> {
+  async openStreetsMap(location: LatLon) : Promise<string> {
     debug('[openStreetsMap]');
 
     const options = {
@@ -21,10 +21,10 @@ class Main {
 
     try {
       const  resultStr = await geocoder.reverse({
-        lat: 32.101786566878445,
-        lon: 34.858965073072056,
-        // lat: asset.metadata.location.lat,
-        // lon: asset.metadata.location.lon
+        // lat: 32.101786566878445,
+        // lon: 34.858965073072056,
+        lat: location.lat,
+        lon: location.lon,
         'accept-language': 'en',
       });
 
@@ -42,7 +42,7 @@ class Main {
     }
   }
 
-  async openMapquest() : Promise<string> {
+  async openMapquest(location: LatLon) : Promise<string> {
     debug('[openmapquest]');
 
     const options = {
@@ -54,10 +54,10 @@ class Main {
 
     try {
       const  resultStr = await geocoder.reverse({
-        lat: 32.101786566878445,
-        lon: 34.858965073072056
-        // lat: asset.metadata.location.lat,
-        // lon: asset.metadata.location.lon
+        // lat: 32.101786566878445,
+        // lon: 34.858965073072056
+        lat: location.lat,
+        lon: location.lon
       });
 
       debug('[openmapquest] got result:', resultStr);
@@ -74,7 +74,7 @@ class Main {
   }
 
 
-  async google()  {
+  async google(location: LatLon)  {
     debug('[google]');
 
     const options = {
@@ -87,13 +87,13 @@ class Main {
 
     try {
       const  resultStr = await geocoder.reverse({
-        lat: 32.101786566878445,
-        lon: 34.858965073072056
-        // lat: asset.metadata.location.lat,
-        // lon: asset.metadata.location.lon
+        // lat: 32.101786566878445,
+        // lon: 34.858965073072056
+        lat: location.lat,
+        lon: location.lon
       });
 
-      debug('[google] got result:', resultStr);      //----------------------------------------------------------------------------------------------------------------------------------------
+      debug('[google] got result:', resultStr);
     }
     catch(e) {
       debug('[google] failed execution:', e.stack)
