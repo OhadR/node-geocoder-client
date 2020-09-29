@@ -152,18 +152,28 @@ class Main {
   async run() {
     let formattedLocation;
 
-    formattedLocation = await this.openMapquest();
+    const location: LatLon = {
+      lat: 32.101786566878445,
+      lon: 34.858965073072056
+    };
+
+    formattedLocation = await this.openMapquest(location);
     debug('openMapquest() output: ' + formattedLocation);
 
-    formattedLocation = await this.openStreetsMap();
+    formattedLocation = await this.openStreetsMap(location);
     debug('openStreetsMap() output: ' + formattedLocation);
 
-    formattedLocation = await this.google();
+/*
+    formattedLocation = await this.google(location);
 
     formattedLocation = await this.bigDataCloud({
       lat: 32.101786566878445,
       lon: 34.858965073072056});
     debug('bigDataCloud() output: ' + formattedLocation);
+*/
+    // formattedLocation = await 9this.mapbox(location);
+    // debug('mapbox() output: ' + formattedLocation);
+
   }
 }
 
