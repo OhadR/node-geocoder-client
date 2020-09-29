@@ -8,6 +8,13 @@ https://www.npmjs.com/package/node-geocoder
 
 A wrapper for many providers to get geocoding, and reverse-geocoding.
 
+----
+
+    npm install --save @mapbox/mapbox-gl-geocoder
+    
+from npm:
+
+https://www.npmjs.com/package/@mapbox/mapbox-gl-geocoder
     
 ## Environment Variables:
     

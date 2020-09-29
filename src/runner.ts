@@ -1,6 +1,7 @@
 var debug = require('debug')('runner');
 import * as NodeGeocoder from 'node-geocoder';
 const client = require('@bigdatacloudapi/client')('df8899cb610e475aa93a6a880352b834');
+//import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 interface LatLon {
   lat: number,
@@ -125,6 +126,26 @@ class Main {
     }
     catch(e) {
       debug('[bigDataCloud] failed execution:', e.stack)
+    }
+  }
+
+  async mapbox(location: LatLon)  {
+    debug('[mapbox]');
+
+    const geocodingClient = new MapboxGeocoder({
+      accessToken: 'pk.eyJ1Ijoib2hhZHIiLCJhIjoiY2tmZGdxZWRzMWg4NDJ3bGQ3ODZweDBkcCJ9.BSO07F6VHDIp3QxPVaFyKw',
+    });
+
+    try {
+      geocodingClient.reverseGeocode({
+        query: [location.lat, location.lon]
+      })
+          .send();
+
+      debug('[mapbox] got result:', 'resultStr');
+    }
+    catch(e) {
+      debug('[mapbox] failed execution:', e.stack)
     }
   }
 
