@@ -38,6 +38,24 @@ http://nominatim.org/release-docs/latest/api/Reverse
 
 i use also the `accept-language` param, to set the language of result.
 
+The full object (actually it is an array of objects) that OSM return is:
+
+    [{
+        latitude: 32.10156344707361,
+        longitude: 34.85901258256623,
+        formattedAddress: 'Em HaMoshavot, Kiryat Aryeh Industrial Zone, Petah Tikva, Petah Tikva Subdistrict, Center District, no, Israel',
+        country: 'Israel',
+        city: 'Petah Tikva',
+        state: 'Center District',
+        zipcode: 'no',
+        streetName: 'Em HaMoshavot',
+        streetNumber: undefined,
+        countryCode: 'IL',
+        neighbourhood: '',
+        provider: 'openstreetmap'
+    }]
+
+
 #### MapQuest Open APIs
 https://developer.mapquest.com/documentation/open/
 
