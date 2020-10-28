@@ -101,6 +101,7 @@ class Main {
     }
   }
 
+
   private async bigDataCloud(location: LatLon) {
     if(!location.lon ||
         !location.lat ||
@@ -122,7 +123,9 @@ class Main {
         debug('[bigDataCloud] resultStr is null:');
         return null;
       }
-      return resultStr[0].city + ', ' +resultStr[0].country;
+      const result = JSON.parse(resultStr);
+      debug('[bigDataCloud] parsed result:', result);
+      return result.city + ', ' +result.countryName;
     }
     catch(e) {
       debug('[bigDataCloud] failed execution:', e.stack)
@@ -165,12 +168,10 @@ class Main {
 
 /*
     formattedLocation = await this.google(location);
-
-    formattedLocation = await this.bigDataCloud({
-      lat: 32.101786566878445,
-      lon: 34.858965073072056});
-    debug('bigDataCloud() output: ' + formattedLocation);
 */
+    formattedLocation = await this.bigDataCloud(location);
+    debug('bigDataCloud() output: ' + formattedLocation);
+
     // formattedLocation = await 9this.mapbox(location);
     // debug('mapbox() output: ' + formattedLocation);
 

@@ -44,3 +44,13 @@ https://developer.mapquest.com/documentation/open/
 ##### API Key
 
 Important: Usage of the Open APIs requires an API key. If you do not already have one, please sign in to the [MapQuest Developer Network](http://developer.mapquest.com/) and visit the [Keys & Reporting](https://developer.mapquest.com/user/me/apps) page.
+
+#### BigDataCloud
+
+https://www.bigdatacloud.com/customer/account
+
+the HUGE problem with this solution is that if you exceed the quota, BDC exits(!!!). No error is thrown, but your app is dead.
+
+This solution cannot be used (unless you pay).
+
+![BDC](/Image_5.jpg)
