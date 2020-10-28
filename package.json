@@ -11,9 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "@bigdatacloudapi/client": "^1.0.1",
-    "@mapbox/mapbox-gl-geocoder": "^4.7.0",
     "@types/node": "^14.0.27",
     "debug": "^4.1.1",
+    "mapbox": "^1.0.0-beta10",
     "node-geocoder": "^3.27.0"
   }
 }

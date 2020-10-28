@@ -1,7 +1,7 @@
 var debug = require('debug')('runner');
 import * as NodeGeocoder from 'node-geocoder';
 const client = require('@bigdatacloudapi/client')('df8899cb610e475aa93a6a880352b834');
-//import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import * as MapboxClient from 'mapbox';
 
 interface LatLon {
   lat: number,
@@ -88,8 +88,6 @@ class Main {
 
     try {
       const  resultStr = await geocoder.reverse({
-        // lat: 32.101786566878445,
-        // lon: 34.858965073072056
         lat: location.lat,
         lon: location.lon
       });
@@ -132,20 +130,27 @@ class Main {
     }
   }
 
+
   async mapbox(location: LatLon)  {
     debug('[mapbox]');
 
-    const geocodingClient = new MapboxGeocoder({
-      accessToken: 'pk.eyJ1Ijoib2hhZHIiLCJhIjoiY2tmZGdxZWRzMWg4NDJ3bGQ3ODZweDBkcCJ9.BSO07F6VHDIp3QxPVaFyKw',
-    });
+    const mapboxClient = new MapboxClient('pk.eyJ1Ijoib2hhZHIiLCJhIjoiY2tmZGdxZWRzMWg4NDJ3bGQ3ODZweDBkcCJ9.BSO07F6VHDIp3QxPVaFyKw');
 
     try {
-      geocodingClient.reverseGeocode({
-        query: [location.lat, location.lon]
-      })
-          .send();
+      const result = await mapboxClient.geocodeReverse({
+        latitude: location.lat,
+        longitude: location.lon
+      });
 
-      debug('[mapbox] got result:', 'resultStr');
+      //debug('[mapbox] got result:', result);
+      //the result is under "entity":
+      if(result.status == 200) {
+        debug('[mapbox] got result (entity):', result.entity);
+//        debug('[mapbox] got result (entity):', JSON.stringify( result.entity ));
+      }
+      else {
+        debug('[mapbox] get ERROR');
+      }
     }
     catch(e) {
       debug('[mapbox] failed execution:', e.stack)
@@ -172,8 +177,8 @@ class Main {
     formattedLocation = await this.bigDataCloud(location);
     debug('bigDataCloud() output: ' + formattedLocation);
 
-    // formattedLocation = await 9this.mapbox(location);
-    // debug('mapbox() output: ' + formattedLocation);
+    formattedLocation = await this.mapbox(location);
+    debug('mapbox() output: ' + formattedLocation);
 
   }
 }

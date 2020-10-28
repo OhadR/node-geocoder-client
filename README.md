@@ -9,12 +9,6 @@ https://www.npmjs.com/package/node-geocoder
 A wrapper for many providers to get geocoding, and reverse-geocoding.
 
 ----
-
-    npm install --save @mapbox/mapbox-gl-geocoder
-    
-from npm:
-
-https://www.npmjs.com/package/@mapbox/mapbox-gl-geocoder
     
 ## Environment Variables:
     
@@ -72,3 +66,15 @@ the HUGE problem with this solution is that if you exceed the quota, BDC exits(!
 This solution cannot be used (unless you pay).
 
 ![BDC](/Image_5.jpg)
+
+#### MapBox
+
+    npm install --save mapbox
+    
+from npm:
+
+UI (GL) based: ~~https://www.npmjs.com/package/@mapbox/mapbox-gl-geocoder~~
+
+mapbox-sdk-js: https://www.npmjs.com/package/mapbox
+
+https://docs.mapbox.com/api/search/#geocoding
