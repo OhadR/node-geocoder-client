@@ -24,7 +24,11 @@ Add the following to  `tsconfig.json`:
     //let debugger stop in TS files:
     "sourceMap": true    
     
-#### OpenStreetMap 
+## Debug from WebStorm
+
+![webstorm](/debug_config.jpg)
+    
+### OpenStreetMap 
 
 uses nominatim.
 
@@ -50,14 +54,14 @@ The full object (actually it is an array of objects) that OSM return is:
     }]
 
 
-#### MapQuest Open APIs
+### MapQuest Open APIs
 https://developer.mapquest.com/documentation/open/
 
-##### API Key
+#### API Key
 
 Important: Usage of the Open APIs requires an API key. If you do not already have one, please sign in to the [MapQuest Developer Network](http://developer.mapquest.com/) and visit the [Keys & Reporting](https://developer.mapquest.com/user/me/apps) page.
 
-#### BigDataCloud
+### BigDataCloud
 
 https://www.bigdatacloud.com/customer/account
 
@@ -67,7 +71,7 @@ This solution cannot be used (unless you pay).
 
 ![BDC](/Image_5.jpg)
 
-#### MapBox
+### MapBox
 
     npm install --save mapbox
     
