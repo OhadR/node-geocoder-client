@@ -27,6 +27,11 @@ Add the following to  `tsconfig.json`:
 ## Debug from WebStorm
 
 ![webstorm](/debug_config.jpg)
+
+Do not forget the "recompile after changes flag":
+
+![webstorm2](/recompile_after_change.jpg)
+
     
 ### OpenStreetMap 
 
